@@ -15,6 +15,8 @@ def f1(dc, n):
 def f2(dc):
 	lst = []
 	for k, v in dc.items():
+		lst.append(v)
+	for k, v in dc.items():
 		if v in lst:
 			del dc[k]
 		lst.append(v)
@@ -23,13 +25,13 @@ def f2(dc):
 k = 101
 
 def f3(n):
-
 	k = sum([int(el) for el in str(n)])
 	print(k)
 	while (k >= 10):
 		n = sum([int(el) in n])
 		k = sum([int(el) in n])
 	return k
+print(f3(156))
 
 def f4(str_1):
 	lst = ["у","е","ы","а","о","э","я","и"]
@@ -44,4 +46,3 @@ def f4(str_1):
 		str_2 += str(lst_1[i])
 
 	return str_2
-print(f4("Привееет! Как Дела?"))
