@@ -37,7 +37,7 @@ def main(request):
             for elem in db:
                 sum += elem[0]
             mean = sum / len(db)
-            imt = bmi / mean - 1
+            imt = round((bmi / mean - 1) * 10, 1)
             print(imt)
 
 
