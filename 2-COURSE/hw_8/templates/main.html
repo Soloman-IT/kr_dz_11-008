@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form action = "{% url 'main' %}" method = "post">
+    {% csrf_token %}
+    {#	<label for="name">Your name: </label>#}
+    {#	<input id="name" type="text" name="name">#}
+    {#    <label for="weight">Your weight: </label>#}
+    {#	<input id="weight" type="text" name="weight">#}
+    {#	<label for="height">Your height: </label>#}
+    {#	<input id="height" type="text" name="height">#}
+    {#    <label for="years">Your years: </label>#}
+    {#	<input id="years" type="text" name="years">#}
+    {#    <p>Your sizes:</p>#}
+    {#    <label for = 'xxxl'>XXXL</label>#}
+    {#    <input id="xxxl" type="radio" name="size" value="XXXL">#}
+    {#    <label for = 'xxl'>XXL</label>#}
+    {#    <input id="xxl" type="radio" name="size" value="XXL">#}
+    {#    <label for = 'xl'>XL</label>#}
+    {#    <input id="xl" type="radio" name="size" value="XL">#}
+    {#    <label for = 'l'>L</label>#}
+    {#    <input id="l" type="radio" name="size" value="L">#}
+    {#    <label for = 'm'>M</label>#}
+    {#    <input id="m" type="radio" name="size" value="M">#}
+    {#    <label for = 's'>S</label>#}
+    {#    <input id="s" type="radio" name="size" value="MS">#}
+    {#    <label for = 'xs'>XS</label>#}
+    {#    <input id="xs" type="radio" name="size" value="XS">#}
+    {#    <p>Ваш гендер</p><br>#}
+    {#    <label for = "man" >Man</label>#}
+    {#    <input id = "man" type="radio" name = "gender" value="man">#}
+    {#    <label for = "woman" >Woman</label>#}
+    {#    <input id = "woman" type="radio" name = "gender" value="woman">#}
+    {#    <label for = "helicopter" >Helicopter</label>#}
+    {#    <input id = "helicopter" type="radio" name = "gender" value="helicopter">#}
+    {{ form.as_p }}
+    {% if size == 'XXXL' or size == 'MS' %}
+        <font color="red" size="4">Для вашего размера одежды (талии) калькулятор может дать ошибочный ответ.</font>
+    {% endif %}
+    <input type="submit" value="OK">
+</form>
+{% if result %}
+    <p>Ваше имя: {{ user.0 }}</p>
+    <p>Ваш возраст: {{ user.1 }}</p>
+    <p>Рост: {{ user.2 }}</p>
+    <p>Вес: {{ user.3 }}</p>
+         <p>Вердикт: {{ result }}</p>
+         <p>Ваш размер : {{ user.4 }}</p>
+         <p>Ваш ИМТ на {{ user.5 }}% больще среди всех</p>
+    {% endif %}
+
+Вы бил здесь {{ count }} раз
+<p>А вот и ссылочки :</p>
+<a href="{% url 'dop_1' %}">хоп</a>
+<a href="{% url 'dop_2' %}">гоп</a>
+</body>
+</html>
