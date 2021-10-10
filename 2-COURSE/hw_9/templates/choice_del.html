@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+Вы точно хотите удалить эти данные?
+{{ form.as_p }}
+<a href="{% url 'del' id_message %}">Да(подумой дважды)</a>
+<a href="{% url 'lst_obj' %}">Нет</a>
+</body>
+</html>

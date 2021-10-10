@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+Вы уверены, что хотите изменить данные?
+<form action="{% url 'ended_edit' id %}" method="post">
+    {% csrf_token %}
+    <label for = 'yes'>Да</label>
+    <input id="yes" type="url" name="size" value="yes">
+    <label for = 'no'>Нет</label>
+    <input id="no" type="radio" name="size" value="no">
+    <input type="submit" value="OK">
+</form>
+</body>
+</html>
