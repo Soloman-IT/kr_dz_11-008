@@ -3,8 +3,20 @@ import threading
 import time
 from threading import Thread
 import pickle
+from hw_client import Smth
 
-BUFFER = 1024
+
+# class Smth:
+#
+#     def __init__(self):
+#         self.x = 13
+#         self.y = 34
+#
+#     def __str__(self):
+#         return f"{self.x}  {self.y}"
+#
+
+BUFFER = 2048
 
 
 class Client:
@@ -80,13 +92,16 @@ class Server:
     def recv_file(self, client, new_client=False):
         try:
             while 1:
-                flag = client.connection.recv(BUFFER)
-                print(flag.decode())
-                with open(f"client_{client.num}.pickle", "rb") as f:
-                    data = pickle.load(f)
-                    print(data, "from", f" client_{client.num}")
-                    self.send_all(client, f'client_{client.num} ', data)
-                    print("передал")
+                data = client.connection.recv(BUFFER)
+                print(data)
+                data = pickle.loads(data)
+                print(data)
+                    # with open(f"client_{client.num}.pickle", "rb") as f:
+                    #     data = pickle.dumps(f)
+                    #     print(data, "from", f" client_{client.num}")
+
+                self.send_all(client, f'client_{client.num} ', data)
+                print("Отправлено")
         except Exception:
             self.close_client(client)
             return False

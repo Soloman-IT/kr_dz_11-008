@@ -6,7 +6,17 @@ import random
 import pickle
 
 
-SIZE_OF_PART = 1024
+class Smth:
+
+	def __init__(self):
+		self.x = 13
+		self.y = 34
+
+	def __str__(self):
+		return f"{self.x}  {self.y}"
+
+
+SIZE_OF_PART = 2048
 
 class Client:
 	def __init__(self, ip, port, num):
@@ -17,9 +27,8 @@ class Client:
 	def recieve(self):
 		return self.sock.recv(SIZE_OF_PART).decode('UTF-8')
 
-	def send(self):
+	def send(self, data):
 		time.sleep(float(self.time))
-		data = "client -".encode('UTF-8')
 		self.sock.send(data)
 
 	def read_socket(self):
@@ -31,13 +40,24 @@ class Client:
 
 		self.thread = Thread(target=self.read_socket)
 		self.thread.start()
-		while True:
-			time.sleep(float(self.time))
 
-			with open(f"client_{self.num}.pickle", "rb+") as f:
-				list_ = [random.randint(1, 10) for _ in range(10)]
-				pickle.dump(list_, f)
-				self.sock.send('OK'.encode("UTF-8"))
+
+		# with open(f"client_{self.num}.pickle", "rb+") as f:
+		# 	pickle.dump(data, f)
+		# 	self.sock.send('OK'.encode("UTF-8"))
+		while True:
+			if self.num == 2:
+				data = Smth()
+				data = pickle.dumps(data)
+			else:
+				data = [random.randint(1, 10) for _ in range(10)]
+				data = pickle.dumps(data)
+
+			time.sleep(float(self.time))
+			self.send(data)
+
+
+
 
 	def connect(self, ip, port):
 		self.sock = socket.socket()
@@ -52,11 +72,11 @@ class Client:
 		self.sock.close()
 		print('exit')
 
+if __name__ == "__main__":
+	parser = argparse.ArgumentParser("бла бла")
+	parser.add_argument('integers', type=int, nargs=1)
+	args = parser.parse_args()
+	num = args.integers
 
-parser = argparse.ArgumentParser("бла бла")
-parser.add_argument('integers', type=int, nargs=1)
-args = parser.parse_args()
-num = args.integers
-
-client = Client('localhost', 8081, num[0])
-client.loop()
+	client = Client('localhost', 8081, num[0])
+	client.loop()
